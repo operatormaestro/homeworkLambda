@@ -10,7 +10,14 @@ public class Calculator {
     BinaryOperator<Integer> plus = (x, y) -> x + y;
     BinaryOperator<Integer> minus = (x, y) -> x - y;
     BinaryOperator<Integer> multiply = (x, y) -> x * y;
-    BinaryOperator<Integer> devide = (x, y) -> x / y;
+    BinaryOperator<Integer> devide = (x, y) ->  {
+        try {
+            return (x / y);
+        } catch (ArithmeticException e){
+            System.out.println("Error. You can`t be divided by zero!");
+            System.exit(0); // Выхожу из программы, потому как при делении на ноль возникает неопределенность, при этом лямбда-выражение должно вернуть число, а в классе Integer нет NaN.
+        } return 0;
+    };
     UnaryOperator<Integer> pow = x -> x * x;
     UnaryOperator<Integer> abs = x -> x > 0 ? x : x * -1;
     Predicate<Integer> isPositive = x -> x > 0;
